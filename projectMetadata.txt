@@ -1,0 +1,55 @@
+# Table Name: Syntehtic_Fraud_detection_Data
+
+## Description:
+This table captures detailed information about user transactions, including the transaction amount, type, timestamp, and various user behavior metrics. The table is designed to track activities for fraud detection and risk analysis. It includes both real-time transactional data and historical user behavior patterns.
+
+---
+
+## Metadata:
+
+| **Column Name**                    | **Data Type**   | **Description**                                                                 | **Constraints**         | **Default Value**       |
+|-------------------------------------|-----------------|---------------------------------------------------------------------------------|-------------------------|-------------------------|
+| **Transaction_ID**                  | `nvarchar(50)`   | Unique identifier for each transaction.                                         | PRIMARY KEY, NOT NULL   | None                    |
+| **User_ID**                         | `nvarchar(50)`   | Unique identifier for the user involved in the transaction.                     | NOT NULL                | None                    |
+| **Transaction_Amount**              | `float`          | Amount of money involved in the transaction.                                    | NOT NULL                | None                    |
+| **Transaction_Type**                | `nvarchar(50)`   | Type of transaction (e.g., Online, In-Store, ATM).                              | NOT NULL                | None                    |
+| **Timestamp**                       | `datetime2`      | Date and time of the transaction.                                                | NOT NULL                | Current timestamp       |
+| **Account_Balance**                 | `float`          | User's account balance before the transaction.                                  | NOT NULL                | None                    |
+| **Device_Type**                     | `nvarchar(50)`   | Type of device used for the transaction (e.g., Mobile, Desktop).                | NOT NULL                | None                    |
+| **Location**                        | `nvarchar(50)`   | Geographical location of the transaction.                                       | NOT NULL                | None                    |
+| **Merchant_Category**               | `nvarchar(50)`   | Category of merchant involved in the transaction (e.g., Retail, Food, Travel).  | NOT NULL                | None                    |
+| **IP_Address_Flag**                 | `bit`            | Indicates if the IP address was flagged as suspicious (0 = No, 1 = Yes).        | NOT NULL                | 0 (Not Flagged)         |
+| **Previous_Fraudulent_Activity**    | `bit`            | Indicates whether the user has a history of fraudulent activity (0 = No, 1 = Yes). | NOT NULL            | 0                       |
+| **Daily_Transaction_Count**         | `tinyint`        | Number of transactions made by the user that day.                               | NOT NULL                | 0                       |
+| **Avg_Transaction_Amount_7d**       | `float`          | The user's average transaction amount in the past 7 days.                       | NOT NULL                | 0                       |
+| **Failed_Transaction_Count_7d**     | `tinyint`        | Count of failed transactions made by the user in the past 7 days.               | NOT NULL                | 0                       |
+| **Card_Type**                       | `nvarchar(50)`   | Type of payment card used (e.g., Credit, Debit, Prepaid).                       | NOT NULL                | None                    |
+| **Card_Age**                        | `tinyint`        | Age of the card in months.                                                      | NOT NULL                | 0                       |
+| **Transaction_Distance**            | `float`          | The distance between the user's usual location and the transaction location.    | NOT NULL                | 0                       |
+| **Authentication_Method**           | `nvarchar(50)`   | The method used to authenticate the transaction (e.g., PIN, Biometric).         | NOT NULL                | None                    |
+| **Risk_Score**                      | `float`          | Fraud risk score assigned to the transaction.                                    | NOT NULL                | None                    |
+| **Is_Weekend**                      | `bit`            | Indicates whether the transaction occurred on a weekend (0 = No, 1 = Yes).      | NOT NULL                | 0                       |
+| **Fraud_Label**                     | `bit`            | Target variable for fraud detection (0 = Not Fraud, 1 = Fraud).                  | TARGET VARIABLE, NOT NULL | None                   |
+
+---
+
+## **Primary Key:**
+- **Transaction_ID**: This column uniquely identifies each transaction and is set as the **PRIMARY KEY**.
+
+---
+
+## **Not Null Columns:**
+All columns in this table are marked as **NOT NULL**, ensuring that every transaction record has complete data in all fields.
+
+
+--
+
+## **Indexes:**
+- Index on **Transaction_ID** for efficient lookups of individual transactions.
+- Index on **User_ID** for quick retrieval of user-specific transactions.
+- Index on **Fraud_Label** to quickly filter fraudulent transactions for further analysis.
+
+---
+
+## **Usage Notes:**
+- The **Fraud_Label** is the target variable used for fraud detection models.
